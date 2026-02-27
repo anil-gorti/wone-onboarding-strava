@@ -1,0 +1,65 @@
+{
+  "name": "Sneha Deshmukh",
+  "email": "sneha.d@example.com",
+  "age": 29,
+  "gender": "Female",
+  "city": "Pune",
+  "club_name": "Pune Runners",
+  "club_join_date": "2019-08",
+  "self_reported_running_since": "2018",
+  "race_results": [
+    {
+      "event_name": "Pune International Marathon",
+      "date": "2019-12-01",
+      "distance": "Half Marathon",
+      "finish_time": "02:02:18",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Satara Hill Half Marathon",
+      "date": "2020-02-16",
+      "distance": "Half Marathon",
+      "finish_time": "02:08:45",
+      "source": "timing_vendor",
+      "notes": "Hilly course"
+    },
+    {
+      "event_name": "Vasai Virar Mayor Marathon",
+      "date": "2020-03-08",
+      "distance": "Half Marathon",
+      "finish_time": "01:58:30",
+      "source": "timing_vendor",
+      "notes": "PB pre-injury"
+    },
+    {
+      "event_name": "Pune International Marathon",
+      "date": "2023-12-03",
+      "distance": "10K",
+      "finish_time": "00:58:12",
+      "source": "timing_vendor",
+      "notes": "Comeback race after ACL surgery"
+    },
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2024-01-21",
+      "distance": "Half Marathon",
+      "finish_time": "02:18:55",
+      "source": "timing_vendor",
+      "notes": "First half post-surgery"
+    }
+  ],
+  "external_data": {
+    "strava_connected": true,
+    "monthly_volume_km": 80,
+    "recent_activity_types": ["run", "walk"],
+    "other_platforms": []
+  },
+  "self_reported": {
+    "favorite_distance": "Half Marathon",
+    "goals": "Get back to sub-2 hour half marathon",
+    "injuries_mentioned": "ACL surgery in 2021, 18-month recovery",
+    "other_sports": ["swimming"],
+    "coaching_status": "coached"
+  }
+}

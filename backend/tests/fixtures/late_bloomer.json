@@ -1,0 +1,89 @@
+{
+  "name": "Vijay Sharma",
+  "email": "vijay.sharma@example.com",
+  "age": 51,
+  "gender": "Male",
+  "city": "Delhi",
+  "club_name": "Delhi Road Runners",
+  "club_join_date": "2022-01",
+  "self_reported_running_since": "2022",
+  "race_results": [
+    {
+      "event_name": "Airtel Delhi Half Marathon",
+      "date": "2022-10-16",
+      "distance": "10K",
+      "finish_time": "01:12:30",
+      "source": "timing_vendor",
+      "notes": "First ever race at age 48"
+    },
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2023-01-15",
+      "distance": "10K",
+      "finish_time": "01:05:48",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Vedanta Delhi Half Marathon",
+      "date": "2023-03-19",
+      "distance": "Half Marathon",
+      "finish_time": "02:28:15",
+      "source": "timing_vendor",
+      "notes": "First half marathon"
+    },
+    {
+      "event_name": "Airtel Delhi Half Marathon",
+      "date": "2023-10-15",
+      "distance": "Half Marathon",
+      "finish_time": "02:18:42",
+      "source": "timing_vendor",
+      "notes": "10 min improvement"
+    },
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2024-01-21",
+      "distance": "Half Marathon",
+      "finish_time": "02:12:05",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Vedanta Delhi Half Marathon",
+      "date": "2024-03-17",
+      "distance": "Half Marathon",
+      "finish_time": "02:06:30",
+      "source": "timing_vendor",
+      "notes": "PB"
+    },
+    {
+      "event_name": "Spiti Ultra",
+      "date": "2024-06-22",
+      "distance": "50K",
+      "finish_time": "07:45:00",
+      "source": "self_reported",
+      "notes": "First ultra attempt"
+    },
+    {
+      "event_name": "Airtel Delhi Half Marathon",
+      "date": "2024-10-20",
+      "distance": "Half Marathon",
+      "finish_time": "02:02:18",
+      "source": "timing_vendor",
+      "notes": "Sub 2:05 target nearly achieved"
+    }
+  ],
+  "external_data": {
+    "strava_connected": true,
+    "monthly_volume_km": 200,
+    "recent_activity_types": ["run", "trail_run", "walk"],
+    "other_platforms": ["Garmin Connect"]
+  },
+  "self_reported": {
+    "favorite_distance": "Half Marathon",
+    "goals": "Complete a full marathon and try more ultras",
+    "injuries_mentioned": null,
+    "other_sports": [],
+    "coaching_status": "coached"
+  }
+}

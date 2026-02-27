@@ -1,0 +1,49 @@
+{
+  "name": "Ramesh Kulkarni",
+  "email": "ramesh.k@example.com",
+  "age": 52,
+  "gender": "Male",
+  "city": "Mumbai",
+  "club_name": "Runners360",
+  "club_join_date": "2020-01",
+  "self_reported_running_since": "2019",
+  "race_results": [
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2021-01-17",
+      "distance": "10K",
+      "finish_time": "01:08:45",
+      "source": "timing_vendor",
+      "notes": "First timed race"
+    },
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2023-01-15",
+      "distance": "10K",
+      "finish_time": "01:05:20",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "NMDC Hyderabad Marathon",
+      "date": "2023-08-27",
+      "distance": "5K",
+      "finish_time": "00:30:15",
+      "source": "self_reported",
+      "notes": "Fun run with family"
+    }
+  ],
+  "external_data": {
+    "strava_connected": false,
+    "monthly_volume_km": null,
+    "recent_activity_types": [],
+    "other_platforms": []
+  },
+  "self_reported": {
+    "favorite_distance": "10K",
+    "goals": "Stay fit and enjoy Sunday long runs with the group",
+    "injuries_mentioned": "Knee pain on and off",
+    "other_sports": ["cricket", "walking"],
+    "coaching_status": "group_training"
+  }
+}

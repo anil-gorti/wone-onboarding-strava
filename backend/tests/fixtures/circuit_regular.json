@@ -1,0 +1,105 @@
+{
+  "name": "Priya Nair",
+  "email": "priya.nair@example.com",
+  "age": 36,
+  "gender": "Female",
+  "city": "Bengaluru",
+  "club_name": "Bengaluru Runners",
+  "club_join_date": "2019-03",
+  "self_reported_running_since": "2019",
+  "race_results": [
+    {
+      "event_name": "Bengaluru Marathon",
+      "date": "2019-10-20",
+      "distance": "10K",
+      "finish_time": "01:02:15",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Auroville Marathon",
+      "date": "2020-02-09",
+      "distance": "Half Marathon",
+      "finish_time": "02:18:44",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Goa River Marathon",
+      "date": "2020-12-20",
+      "distance": "Half Marathon",
+      "finish_time": "02:12:30",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Bengaluru Marathon",
+      "date": "2021-10-17",
+      "distance": "Half Marathon",
+      "finish_time": "02:08:55",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Hyderabad Marathon",
+      "date": "2022-02-13",
+      "distance": "10K",
+      "finish_time": "00:56:22",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Airtel Delhi Half Marathon",
+      "date": "2022-10-16",
+      "distance": "Half Marathon",
+      "finish_time": "02:05:40",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2023-01-15",
+      "distance": "Half Marathon",
+      "finish_time": "02:03:18",
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Kaveri Trail Marathon",
+      "date": "2023-03-12",
+      "distance": "Half Marathon",
+      "finish_time": "02:22:05",
+      "source": "timing_vendor",
+      "notes": "Trail race, hilly"
+    },
+    {
+      "event_name": "Ladakh Marathon",
+      "date": "2023-09-10",
+      "distance": "Half Marathon",
+      "finish_time": "02:45:30",
+      "source": "timing_vendor",
+      "notes": "Altitude race at 11,500 ft"
+    },
+    {
+      "event_name": "Bengaluru Marathon",
+      "date": "2023-10-15",
+      "distance": "Full Marathon",
+      "finish_time": "04:38:12",
+      "source": "timing_vendor",
+      "notes": "First full marathon"
+    }
+  ],
+  "external_data": {
+    "strava_connected": true,
+    "monthly_volume_km": 120,
+    "recent_activity_types": ["run"],
+    "other_platforms": []
+  },
+  "self_reported": {
+    "favorite_distance": "Half Marathon",
+    "goals": "Run in every major Indian city marathon",
+    "injuries_mentioned": null,
+    "other_sports": ["yoga"],
+    "coaching_status": "group_training"
+  }
+}

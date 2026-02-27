@@ -1,0 +1,102 @@
+{
+  "name": "Arjun Mehta",
+  "email": "arjun.mehta@example.com",
+  "age": 32,
+  "gender": "Male",
+  "city": "Pune",
+  "club_name": "Pune Running Beyond",
+  "club_join_date": "2021-06",
+  "self_reported_running_since": "2021",
+  "race_results": [
+    {
+      "event_name": "Pune International Marathon",
+      "date": "2021-12-05",
+      "distance": "10K",
+      "finish_time": "00:58:30",
+      "category_rank": null,
+      "overall_rank": 412,
+      "total_participants": 1800,
+      "source": "timing_vendor",
+      "notes": "First race ever"
+    },
+    {
+      "event_name": "Satara Hill Half Marathon",
+      "date": "2022-03-20",
+      "distance": "Half Marathon",
+      "finish_time": "02:15:42",
+      "category_rank": null,
+      "overall_rank": 287,
+      "total_participants": 900,
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Pune International Marathon",
+      "date": "2022-12-04",
+      "distance": "Half Marathon",
+      "finish_time": "02:05:18",
+      "category_rank": 45,
+      "overall_rank": 198,
+      "total_participants": 2100,
+      "source": "timing_vendor",
+      "notes": "10 min improvement"
+    },
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2023-01-15",
+      "distance": "Half Marathon",
+      "finish_time": "01:58:22",
+      "category_rank": 38,
+      "overall_rank": 342,
+      "total_participants": 12000,
+      "source": "timing_vendor",
+      "notes": "Sub-2 goal achieved"
+    },
+    {
+      "event_name": "Satara Hill Half Marathon",
+      "date": "2023-03-19",
+      "distance": "Half Marathon",
+      "finish_time": "01:55:10",
+      "category_rank": 22,
+      "overall_rank": 134,
+      "total_participants": 950,
+      "source": "timing_vendor",
+      "notes": null
+    },
+    {
+      "event_name": "Pune International Marathon",
+      "date": "2023-12-03",
+      "distance": "Full Marathon",
+      "finish_time": "04:22:45",
+      "category_rank": null,
+      "overall_rank": 310,
+      "total_participants": 1500,
+      "source": "timing_vendor",
+      "notes": "First full marathon"
+    },
+    {
+      "event_name": "Tata Mumbai Marathon",
+      "date": "2024-01-21",
+      "distance": "Full Marathon",
+      "finish_time": "04:05:33",
+      "category_rank": 52,
+      "overall_rank": 445,
+      "total_participants": 8000,
+      "source": "timing_vendor",
+      "notes": "17 min improvement"
+    }
+  ],
+  "external_data": {
+    "strava_connected": true,
+    "monthly_volume_km": 165,
+    "recent_activity_types": ["run", "trail_run"],
+    "other_platforms": ["Garmin Connect"]
+  },
+  "self_reported": {
+    "favorite_distance": "Half Marathon",
+    "goals": "Sub-3:45 marathon by end of 2024",
+    "injuries_mentioned": "Mild ITB issue in 2022, resolved",
+    "other_sports": ["cycling"],
+    "coaching_status": "coached"
+  }
+}
