@@ -1,5 +1,6 @@
 import hashlib
 import json
+import uuid
 from typing import List, Optional
 
 from sqlalchemy import func, select
@@ -90,8 +91,29 @@ class RunnerService:
         await self.db.commit()
         return True
 
+    async def backfill_race_ids(self, runner: Runner) -> None:
+        """Lazily assign UUIDs to any race that was stored without one.
+
+        race_results is a JSON column — SQLAlchemy won't detect in-place
+        mutations, so we must reassign the list and call flag_modified.
+        """
+        from sqlalchemy.orm.attributes import flag_modified
+
+        races = list(runner.race_results or [])
+        modified = any(not r.get("id") for r in races)
+        if modified:
+            for r in races:
+                if not r.get("id"):
+                    r["id"] = str(uuid.uuid4())
+            runner.race_results = races
+            flag_modified(runner, "race_results")
+            await self.db.commit()
+            await self.db.refresh(runner)
+
     async def get_runner_with_status(self, runner: Runner) -> dict:
         """Enrich runner with profile and pipeline status."""
+        await self.backfill_race_ids(runner)
+
         profile_result = await self.db.execute(
             select(Profile).where(Profile.runner_id == runner.id, Profile.is_active == True).limit(1)
         )

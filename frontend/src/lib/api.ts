@@ -1,6 +1,8 @@
 import type {
   Runner,
   RunnerListResponse,
+  RaceResult,
+  RacePatch,
   PipelineTriggerResponse,
   PipelineRun,
   PipelineRunListResponse,
@@ -46,6 +48,13 @@ export const listPipelineRuns = () =>
 
 export const getPipelineRun = (runId: string) =>
   fetchJSON<PipelineRun>(`/pipeline/runs/${runId}`);
+
+/** Update mutable fields on a single race result. */
+export const patchRace = (runnerId: string, raceId: string, updates: RacePatch) =>
+  fetchJSON<RaceResult>(`/runners/${runnerId}/races/${raceId}`, {
+    method: "PATCH",
+    body: JSON.stringify(updates),
+  });
 
 // Profiles
 export const getProfile = (runnerId: string) =>

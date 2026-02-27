@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { ChevronDown, ChevronUp, MapPin, User, Activity, Trophy } from 'lucide-react'
+import { MapPin, ArrowRight, RefreshCw, Loader2 } from 'lucide-react'
 import type { StravaConfirmData, NormalizedRace } from '@/lib/normalize'
 
 interface Props {
@@ -11,130 +12,148 @@ interface Props {
 
 export default function ConfirmView({ data }: Props) {
   const { athlete, stats, races } = data
-  const [racesOpen, setRacesOpen] = useState(false)
+  const recentRaces = races.slice(0, 3)
+  const router = useRouter()
+  const [building, setBuilding] = useState(false)
+  const [buildError, setBuildError] = useState<string | null>(null)
+
+  async function handleBuild() {
+    setBuilding(true)
+    setBuildError(null)
+    try {
+      const res = await fetch('/api/runners/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ athlete, races }),
+      })
+      if (!res.ok) throw new Error('Failed to create profile')
+      router.push('/my-results')
+    } catch {
+      setBuildError('Something went wrong. Please try again.')
+      setBuilding(false)
+    }
+  }
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-2xl mx-auto space-y-4">
+    <main className="min-h-screen bg-[#FAFAF9] flex flex-col items-center py-16 px-4">
+      <div className="w-full max-w-lg">
 
-        {/* ── Page header ─────────────────────────────────────────────── */}
-        <div className="text-center pb-4">
-          <span className="inline-block text-orange-500 font-semibold text-xs tracking-widest uppercase mb-3">
-            Strava Connected
+        {/* ── WONE wordmark ──────────────────────────────────────────── */}
+        <div className="text-center mb-12">
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-orange-500">
+            WONE
           </span>
-          <h1 className="text-3xl font-bold text-gray-900">Confirm your profile</h1>
-          <p className="text-gray-500 text-sm mt-2">
-            Review your Strava data before we build your WONE profile.
-          </p>
         </div>
 
-        {/* ── Athlete card ─────────────────────────────────────────────── */}
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center gap-5">
-          <div className="relative w-20 h-20 shrink-0">
+        {/* ── Athlete hero ───────────────────────────────────────────── */}
+        <div className="flex flex-col items-center text-center mb-10">
+          <div className="relative w-28 h-28 mb-5">
             <Image
               src={athlete.photo}
               alt={athlete.name}
               fill
-              sizes="80px"
-              className="rounded-full object-cover ring-4 ring-orange-50"
+              sizes="112px"
+              className="rounded-full object-cover ring-4 ring-orange-500 ring-offset-4 ring-offset-[#FAFAF9] shadow-xl"
               priority
             />
           </div>
 
-          <div className="min-w-0">
-            <h2 className="text-2xl font-bold text-gray-900 truncate">{athlete.name}</h2>
+          <h1 className="text-4xl font-black text-gray-950 tracking-tight leading-none mb-2">
+            {athlete.name}
+          </h1>
 
-            {athlete.username && (
-              <div className="flex items-center gap-1.5 text-gray-400 text-sm mt-0.5">
-                <User className="w-3.5 h-3.5 shrink-0" />
-                <span>@{athlete.username}</span>
-              </div>
-            )}
-
-            {athlete.location && (
-              <div className="flex items-center gap-1.5 text-gray-500 text-sm mt-1">
-                <MapPin className="w-3.5 h-3.5 shrink-0" />
-                <span>{athlete.location}</span>
-              </div>
-            )}
-          </div>
-        </section>
-
-        {/* ── Aggregate stats ──────────────────────────────────────────── */}
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Activity className="w-4 h-4 text-orange-500" />
-            <h3 className="font-semibold text-gray-800 text-sm uppercase tracking-wide">
-              This year
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <StatTile label="Runs"      value={String(stats.ytd.runs)} />
-            <StatTile label="Distance"  value={`${stats.ytd.distanceKm} km`} />
-            <StatTile label="Hours"     value={stats.ytd.hours} />
-            <StatTile label="Elevation" value={`${stats.ytd.elevationM} m`} />
-          </div>
-
-          <div className="mt-4 pt-4 border-t border-gray-50 flex flex-wrap gap-x-6 gap-y-1 text-sm text-gray-500">
-            <span>
-              All-time runs:{' '}
-              <strong className="text-gray-800">{stats.allTime.runs.toLocaleString()}</strong>
-            </span>
-            <span>
-              All-time distance:{' '}
-              <strong className="text-gray-800">{Number(stats.allTime.distanceKm).toLocaleString()} km</strong>
-            </span>
-          </div>
-        </section>
-
-        {/* ── Race list (toggleable) ───────────────────────────────────── */}
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          <button
-            onClick={() => setRacesOpen((o) => !o)}
-            className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors text-left"
-            aria-expanded={racesOpen}
-          >
-            <div className="flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-orange-500" />
-              <span className="font-semibold text-gray-800">Race history</span>
-              <span className="text-sm text-gray-400">
-                ({races.length} {races.length === 1 ? 'race' : 'races'} found)
-              </span>
-            </div>
-            {racesOpen
-              ? <ChevronUp   className="w-5 h-5 text-gray-400 shrink-0" />
-              : <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />}
-          </button>
-
-          {racesOpen && (
-            <div className="divide-y divide-gray-50">
-              {races.length === 0 ? (
-                <div className="px-6 py-10 text-center text-gray-400 text-sm">
-                  No activities are marked as races in your Strava history.
-                  <br />
-                  <span className="text-xs">
-                    Edit an activity in Strava and set the type to &ldquo;Race&rdquo; for it to appear here.
-                  </span>
-                </div>
-              ) : (
-                races.map((race) => <RaceRow key={race.id} race={race} />)
-              )}
+          {athlete.location && (
+            <div className="flex items-center gap-1.5 text-gray-400 text-sm">
+              <MapPin className="w-3.5 h-3.5 shrink-0" />
+              <span>{athlete.location}</span>
             </div>
           )}
-        </section>
+        </div>
 
-        {/* ── Action bar ──────────────────────────────────────────────── */}
-        <div className="flex gap-3 pt-2">
+        {/* ── All-time stats ─────────────────────────────────────────── */}
+        <div className="grid grid-cols-4 mb-10">
+          <StatPillar
+            value={stats.allTime.runs.toLocaleString()}
+            label="Races"
+            sub="all time"
+          />
+          <StatPillar
+            value={`${Number(stats.allTime.distanceKm).toLocaleString()} km`}
+            label="Distance"
+            sub="all time"
+          />
+          <StatPillar
+            value={stats.ytd.hours}
+            label="Hours"
+            sub="this year"
+          />
+          <StatPillar
+            value={`${Number(stats.ytd.elevationM).toLocaleString()} m`}
+            label="Elevation"
+            sub="this year"
+          />
+        </div>
+
+        {/* ── Divider ────────────────────────────────────────────────── */}
+        <div className="h-px bg-gray-100 mb-8" />
+
+        {/* ── Recent races ───────────────────────────────────────────── */}
+        {recentRaces.length > 0 && (
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xs font-bold tracking-[0.15em] uppercase text-gray-400">
+                Recent races
+              </span>
+              {races.length > 3 && (
+                <a
+                  href="/my-results"
+                  className="text-xs font-semibold text-orange-500 hover:text-orange-600 transition-colors flex items-center gap-1"
+                >
+                  See all {races.length} <ArrowRight className="w-3 h-3" />
+                </a>
+              )}
+            </div>
+
+            <div className="space-y-1">
+              {recentRaces.map((race) => (
+                <RecentRaceRow key={race.id} race={race} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── CTA ────────────────────────────────────────────────────── */}
+        <button
+          onClick={handleBuild}
+          disabled={building}
+          className="w-full bg-gray-950 hover:bg-gray-800 active:bg-black disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-base py-4 rounded-2xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-gray-950/20"
+        >
+          {building ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Building your profile…
+            </>
+          ) : (
+            <>
+              Build my WONE profile
+              <ArrowRight className="w-4 h-4" />
+            </>
+          )}
+        </button>
+
+        {buildError && (
+          <p className="text-center text-sm text-red-500 mt-3">{buildError}</p>
+        )}
+
+        {/* ── Footer ─────────────────────────────────────────────────── */}
+        <div className="text-center mt-6">
           <a
             href="/api/auth/strava"
-            className="flex-1 text-center py-3 px-4 rounded-xl border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 transition-colors"
           >
+            <RefreshCw className="w-3 h-3" />
             Reconnect Strava
           </a>
-          <button className="flex-1 py-3 px-4 rounded-xl bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 active:bg-orange-700 transition-colors">
-            Build my profile →
-          </button>
         </div>
 
       </div>
@@ -144,27 +163,39 @@ export default function ConfirmView({ data }: Props) {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function StatTile({ label, value }: { label: string; value: string }) {
+function StatPillar({
+  value,
+  label,
+  sub,
+}: {
+  value: string
+  label: string
+  sub: string
+}) {
   return (
-    <div className="bg-gray-50 rounded-xl p-4 text-center">
-      <div className="text-2xl font-bold text-gray-900">{value}</div>
-      <div className="text-xs text-gray-500 mt-0.5">{label}</div>
+    <div className="flex flex-col items-center text-center px-2">
+      <span className="text-2xl font-black text-gray-950 leading-none mb-1">
+        {value}
+      </span>
+      <span className="text-xs font-semibold text-gray-700">{label}</span>
+      <span className="text-[10px] text-gray-400 mt-0.5">{sub}</span>
     </div>
   )
 }
 
-function RaceRow({ race }: { race: NormalizedRace }) {
+function RecentRaceRow({ race }: { race: NormalizedRace }) {
   return (
-    <div className="px-6 py-3 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors">
-      <div className="min-w-0">
-        <div className="font-medium text-gray-800 truncate">{race.name}</div>
+    <div className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
+      <div className="min-w-0 flex-1">
+        <div className="font-semibold text-gray-900 text-sm truncate">
+          {race.name}
+        </div>
         <div className="text-xs text-gray-400 mt-0.5">
-          {race.date} &middot; {race.type}
+          {race.date} · {race.distance}
         </div>
       </div>
-      <div className="text-right shrink-0">
-        <div className="text-sm font-semibold text-gray-700">{race.time}</div>
-        <div className="text-xs text-gray-400">{race.distance}</div>
+      <div className="text-sm font-bold text-gray-700 tabular-nums ml-4 shrink-0">
+        {race.time}
       </div>
     </div>
   )
