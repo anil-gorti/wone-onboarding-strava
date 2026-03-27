@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI(title="WONE Profile Pipeline", version="1.0.0", lifespan=lifespan)
+app = FastAPI(title="Strava Runner Profile", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
